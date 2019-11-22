@@ -13,24 +13,35 @@ const io = socketIo(server); // < Interesting!
 server.listen(port, () => console.log(`Listening on port ${port}`));
 
 let interval;
+let i=0;
 io.on("connection", socket => {
   console.log("New client connected");
-  if (interval) {
-    clearInterval(interval);
-  }
-  interval = setInterval(() => getApiAndEmit(socket), 10000);
+
+  setInterval(() => {
+    i++;
+    sendGoData(socket, i);
+  }, 1000);
+
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
 });
 
-const getApiAndEmit = async socket => {
+const sendGoData = async (socket, i) => {
   try {
-    const res = await axios.get(
-      "https://api.darksky.net/forecast/41dff2f216012abafecb18a0440da375/43.7695,11.2558"
-    ); // Getting the data from DarkSky
-    socket.emit("FromAPI", res.data.currently.temperature); // Emitting a new message. It will be consumed by the client
+    socket.emit("FromAPI", "Timeout: " + i); // Sending a new message. It will be consumed by the client
   } catch (error) {
     console.error(`Error: ${error.code}`);
   }
-};
+}
+
+// const getApiAndEmit = async socket => {
+//   try {
+//     const res = await axios.get(
+//       "https://api.darksky.net/forecast/41dff2f216012abafecb18a0440da375/43.7695,11.2558"
+//     ); // Getting the data from DarkSky
+//     socket.emit("FromAPI", res.data.currently.temperature); // Emitting a new message. It will be consumed by the client
+//   } catch (error) {
+//     console.error(`Error: ${error.code}`);
+//   }
+// };
