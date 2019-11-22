@@ -14,34 +14,39 @@ server.listen(port, () => console.log(`Listening on port ${port}`));
 
 let interval;
 let i=0;
-io.on("connection", socket => {
-  console.log("New client connected");
+let sequenceNumberByClient = new Map();
+console.log(sequenceNumberByClient);
 
-  setInterval(() => {
-    i++;
-    sendGoData(socket, i);
-  }, 1000);
+io.on("connection", socket => {
+	console.info(`Client connected [id=${socket.id}]`);
+  console.info('backend');
+	sequenceNumberByClient.set(socket, 1);
+
+	// when socket disconnects, remove it from the list:
+	socket.on("disconnect", () => {
+		sequenceNumberByClient.delete(socket);
+		console.info(`Client gone [id=${socket.id}]`);
+	});
+
+  if (interval) {
+    clearInterval(interval);
+  }
+
+  interval = setInterval(() => sendGoData(socket), 1000);
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");
   });
 });
 
-const sendGoData = async (socket, i) => {
+const sendGoData = async socket => {
   try {
-    socket.emit("FromAPI", "Timeout: " + i); // Sending a new message. It will be consumed by the client
+		for (const [client, sequenceNumber] of sequenceNumberByClient.entries()) {
+			client.emit("seq-num", 'this is from the backend: ' + sequenceNumber);
+			sequenceNumberByClient.set(client, sequenceNumber + 1);
+    }
   } catch (error) {
     console.error(`Error: ${error.code}`);
   }
 }
 
-// const getApiAndEmit = async socket => {
-//   try {
-//     const res = await axios.get(
-//       "https://api.darksky.net/forecast/41dff2f216012abafecb18a0440da375/43.7695,11.2558"
-//     ); // Getting the data from DarkSky
-//     socket.emit("FromAPI", res.data.currently.temperature); // Emitting a new message. It will be consumed by the client
-//   } catch (error) {
-//     console.error(`Error: ${error.code}`);
-//   }
-// };

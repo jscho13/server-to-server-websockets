@@ -6,16 +6,14 @@ class App extends Component {
     super();
     this.state = {
       response: false,
-      endpoint: "http://127.0.0.1:4001"
+      endpoint: "http://127.0.0.1:4000"
     };
   }
 
   componentDidMount() {
     const { endpoint } = this.state;
     const socket = socketIOClient(endpoint);
-    socket.on("FromAPI", data => {
-      this.setState({ response: data })
-    });
+		socket.on("seq-num", (msg) => console.info(msg));
   }
 
   render() {
