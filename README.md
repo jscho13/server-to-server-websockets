@@ -9,8 +9,7 @@
 
 Most websockets examples show a connection between a client and server. This repo is an example of a client, server to server websocket. You may need this pattern if you have middleware that connects your client and serverside code.
 
-Add gif of websocket ping here:
-![ttystudio GIF](https://raw.githubusercontent.com/chjj/ttystudio/master/img/example.gif)
+![demo GIF](cli-ser-ser.gif)
 
 ## Table of Contents
 
