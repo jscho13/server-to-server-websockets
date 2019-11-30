@@ -1,13 +1,12 @@
-const socketIOClient = require("socket.io-client");
-
+const axios = require("axios");
 const express = require("express");
 const http = require("http");
-const socketIo = require("socket.io");
-const axios = require("axios");
-const port = process.env.PORT || 4000;
 const index = require("./routes/index");
-const app = express();
+const port = process.env.PORT || 4000;
+const socketIOClient = require("socket.io-client");
+const socketIo = require("socket.io");
 
+const app = express();
 app.use(index);
 
 const server = http.createServer(app);
@@ -18,17 +17,14 @@ let interval;
 let i=0;
 let sequenceNumberByClient = new Map();
 
-// This file needs to connect to backend
+// This file connects to backend
 io.on("connection", socket => {
 	console.info(`Client connected [id=${socket.id}]`);
   console.info('middleware');
 	sequenceNumberByClient.set(socket, 1);
 
-
-
   const beSocket = socketIOClient('http://127.0.0.1:4001');
   beSocket.on("seq-num", (msg) => console.info(msg));
-
 
 	// when socket disconnects, remove it from the list:
 	socket.on("disconnect", () => {

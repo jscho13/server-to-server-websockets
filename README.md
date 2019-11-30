@@ -18,8 +18,8 @@ Add gif of websocket ping here:
 
 - [Installation](#installation)
 - [Clone](#clone)
-- [Setup](#Setup)
-- [FAQ](#faq)
+- [Setup](#setup)
+- [Technology](#technology)
 - [License](#license)
 
 
@@ -28,37 +28,48 @@ Add gif of websocket ping here:
 - Node v8.16.2
 - React v16.12
 
+
 ### Clone
 
 - Clone this repo to your local machine using `https://github.com/jscho13/server-to-server-websockets`
 
+
 ### Setup
 
-> Download all dependencies
+> Download dependencies for both client and server
 
 ```shell
+$ npm install
 $ cd ./frontend && npm install
-$ cd ../middleware && npm install
-$ cd ../backend && npm install
 ```
 
+
 ## Usage
-- Start the backend dummy service
+> Start the backend dummy service
 ```shell
 $ cd backend
 $ node backend.js
 ```
-- 
-- 
-## Documentation
 
-- Going into more detail on code and technologies used
+> Run the express middleware dummy service
+```shell
+$ cd ../middleware
+$ node middleware.js
+```
+
+> Start client side react 
+```shell
+$ cd ../frontend
+$ npm start
+```
+
+
+## Technology
+- <a href="https://socket.io/" target="_blank">Socket.io</a> is a nifty library that enables real-time, bidirectional and event-based communication. It's not a replacement for Websockets, but includes it and falls back to other techniques like long polling when it fails
+- Client is a React app that utilizes client code Socket.io to connect to middleware
+- Middleware is an express server that uses server-side Socket.io to create a websocket on port 4001
+- Backend is a microservice that exposes a websocket on a single port 4000
 - I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
-
-## FAQ
-
-- **How do I do *specifically* so and so?**
-    - No problem! Just do this.
 
 
 ## License
