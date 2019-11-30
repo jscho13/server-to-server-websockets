@@ -1,5 +1,3 @@
-<img src="websocket.png" style="width:200px" title="websocket" alt="websocket">
-
 # Websocket Demo
 > Demonstrates websocket architecture when traversing several layers
 
