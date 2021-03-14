@@ -68,10 +68,11 @@ $ npm start
 - Backend is a microservice that exposes a websocket on a single port 4000
 - I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
 
-
 ## License
 
 [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2019 © <a href="https://www.linkedin.com/in/jscho13/" target="_blank">Joseph Cho</a>.
+
+![image](https://user-images.githubusercontent.com/8882123/111056101-775d9480-844a-11eb-8499-086105708c73.png)
