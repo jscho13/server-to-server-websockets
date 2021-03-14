@@ -75,6 +75,7 @@ $ npm start
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright 2019 © <a href="https://www.linkedin.com/in/jscho13/" target="_blank">Joseph Cho</a>.
 
-https://user-images.githubusercontent.com/8882123/111056101-775d9480-844a-11eb-8499-086105708c73.png
+
+https://user-images.githubusercontent.com/8882123/111056287-cf48cb00-844b-11eb-9c14-07f3a04af031.png
 https://user-images.githubusercontent.com/8882123/111056236-7c6f1380-844b-11eb-86cb-54800e352999.png
 
